@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: left;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  background-color: #27d732;
+}
+
+header h1 {
+  color: #ffffff;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+header p {
+  color: #ffffff;
+  padding: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.cities-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.cities-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.city {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.city:hover {
+  transform: translateY(-5px);
+}
+
+.city h2 {
+  color: #000000;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.city p {
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ddd;
+  margin: 30px 0;
+}
+
+footer {
+  text-align: left;
+  padding: 20px;
+  background-color: #3f87d0;
+  color: white;
+  border-radius: 8px;
+}
+
+footer h2 {
+  margin-bottom: 15px;
+  color: #ecf0f1;
+}
+
+footer p {
+  margin-bottom: 20px;
+}
+
+#footer-image-container {
+  margin-top: 5px;
+  display: flex;
+  justify-content: right;
+}
+
+#footer-image-container img {
+  max-width: 80px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cities-row {
+    flex-direction: column;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    width: 100px;
+    max-width: 300px;
+  }
+}
