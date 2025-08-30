@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  
+
   let isColumnLayout = false;
   let isOriginalTitle = true;
   let isOriginalColor = true;
-  let imageAdded = false;
 
   // Elementos del DOM
   const layoutBtn = document.getElementById("layout-btn");
@@ -17,6 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const footerImageContainer = document.getElementById(
     "footer-image-container"
   );
+
+  // Elementos del modal
+  const imageModal = document.getElementById("image-modal");
+  const imageUrlInput = document.getElementById("image-url");
+  const localImageInput = document.getElementById("local-image");
+  const cancelBtn = document.getElementById("cancel-btn");
+  const insertBtn = document.getElementById("insert-btn");
 
   // Función para cambiar el diseño de fila a columna
   function toggleLayout() {
@@ -66,28 +72,80 @@ document.addEventListener("DOMContentLoaded", function () {
     isOriginalColor = !isOriginalColor;
   }
 
-  // Función para agregar imagen al footer
-  function addImageToFooter() {
-    if (!imageAdded) {
-      const image = document.createElement("img");
-      image.src =
-        "https://upload.wikimedia.org/wikipedia/commons/6/64/Logo_UCA_2015.jpg";
-      image.alt = "Imagen de ejemplo";
-      image.style.maxWidth = "300px";
+  // Función para abrir el modal
+  function openImageModal() {
+    imageModal.style.display = "flex";
+  }
 
-      footerImageContainer.appendChild(image);
-      imageBtn.textContent = "Eliminar imagen del footer";
-      imageAdded = true;
-    } else {
-      footerImageContainer.innerHTML = "";
-      imageBtn.textContent = "Agregar imagen al footer";
-      imageAdded = false;
+  // Función para cerrar el modal
+  function closeImageModal() {
+    imageModal.style.display = "none";
+    imageUrlInput.value = "";
+    localImageInput.value = "";
+  }
+
+  // Función para ajustar el tamaño del contenedor según la imagen
+  function adjustImageContainerSize(img) {
+    // Esperar a que la imagen cargue completamente
+    img.onload = function () {
+      console.log("Imagen cargada:", img.width, "x", img.height);
+    };
+  }
+
+  // Función para insertar imagen
+  function insertImage() {
+    let imageSrc = "";
+
+    // Verificar si se proporcionó una URL
+    if (imageUrlInput.value.trim() !== "") {
+      imageSrc = imageUrlInput.value;
     }
+    // Verificar si se seleccionó un archivo local
+    else if (localImageInput.files && localImageInput.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        footerImageContainer.innerHTML = "";
+        const image = document.createElement("img");
+        image.src = e.target.result;
+        footerImageContainer.appendChild(image);
+        adjustImageContainerSize(image);
+        closeImageModal();
+      };
+      reader.readAsDataURL(localImageInput.files[0]);
+      return;
+    } else {
+      alert(
+        "Por favor, introduce una URL de imagen o selecciona un archivo local."
+      );
+      return;
+    }
+
+    // Crear elemento de imagen
+    footerImageContainer.innerHTML = "";
+    const image = document.createElement("img");
+    image.src = imageSrc;
+    image.onerror = function () {
+      alert("Error al cargar la imagen. Por favor, verifica la URL.");
+      footerImageContainer.innerHTML = "";
+    };
+    footerImageContainer.appendChild(image);
+    adjustImageContainerSize(image);
+
+    closeImageModal();
   }
 
   // Event listeners
   layoutBtn.addEventListener("click", toggleLayout);
   titleBtn.addEventListener("click", changeTitle);
   colorBtn.addEventListener("click", changeColors);
-  imageBtn.addEventListener("click", addImageToFooter);
+  imageBtn.addEventListener("click", openImageModal);
+  cancelBtn.addEventListener("click", closeImageModal);
+  insertBtn.addEventListener("click", insertImage);
+
+  // Cerrar modal al hacer clic fuera del contenido
+  window.addEventListener("click", function (event) {
+    if (event.target === imageModal) {
+      closeImageModal();
+    }
+  });
 });

@@ -16,7 +16,7 @@
     </header>
 
     <div class="button-container">
-      <button id="layout-btn">Cambiar a diseño columna</button>
+      <button id="layout-btn">Cambiar diseño a columna</button>
       <button id="title-btn">Cambiar título</button>
       <button id="color-btn">Cambiar colores</button>
     </div>
@@ -43,13 +43,33 @@
     <hr>
 
     <footer id="footer">
-      <h2>Footer Demo</h2>
-      <p>footer example demo!</p>
-      <div class="button-container">
-        <button id="image-btn">Agregar imagen al footer</button>
+      <div class="footer-content">
+        <div class="footer-text">
+          <h2>Footer Demo</h2>
+          <p>footer example demo!</p>
+          <button id="image-btn" class="footer-button">Agregar imagen al footer</button>
+        </div>
       </div>
       <div id="footer-image-container"></div>
     </footer>
+  </div>
+
+  <div id="image-modal" class="modal">
+    <div class="modal-content">
+      <h3>Insertar imagen en el footer</h3>
+      <div class="input-group">
+        <label for="image-url">Pegar URL de imagen:</label>
+        <input type="url" id="image-url" placeholder="https://ejemplo.com/imagen.jpg">
+      </div>
+      <div class="input-group">
+        <label>O subir archivo local:</label>
+        <input type="file" id="local-image" accept="image/*">
+      </div>
+      <div class="modal-buttons">
+        <button id="cancel-btn" class="cancel-btn">Cancelar</button>
+        <button id="insert-btn">Insertar imagen</button>
+      </div>
+    </div>
   </div>
 
   <script src="Script.js"></script>
